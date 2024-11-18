@@ -2,7 +2,7 @@
 I am making a docker container and image. Containers are used like templates, and images are made from containers. This is important as it allows for easy sharing to others or quickly moving to new server providers.
 
 To install docker you go to `https://hub.docker.com/` and there is a download button on the top of the page. When run it will require a system restart.
-You can make a repository in docker by going to `https://hub.docker.com/repositories/{username}` and clicking create repository in the top right. You can also choose whether it is public or private here. (Source: `https://hub.docker.com/repository/create?namespace=jpankake67`). Shows up when making a repo
+You can make a repository in docker by going to https://hub.docker.com/repositories/{username} and clicking create repository in the top right. You can also choose whether it is public or private here. (Source: https://hub.docker.com/repository/create?namespace=jpankake67). Shows up when making a repo
 
 *Note for grading I messed up some of these parts but decided to leave then in so you could see my process. Most of my errors are from not realizing docker has a terminal*
 
@@ -44,6 +44,6 @@ I then used:
 `docker build -f Dockerfile -t angular-app .` Which builds the container
 `docker run -p 4200:4200 angular-app` Which runs the container
 
-Looking back at some of my errors, I think they just stemmed from my unfamiliarity with docker and not realizing it had it's own terminal. I put the container as a local file on my machine with dockerfile and .dockerignore (ChatGPT) in the angular-site folder. Dockerfile was built following the guideline of the project and I used `node:18-bullseye` like suggested and didn't need to install nodejs like I did earlier. To view the image running you can go to `http://localhost:4200`. In the desktop app you can push and pull images by clicking on the three dots next to an image. You need to make sure you are logged in with `docker login`. Then you tag the image with `docker tag your_image username/repository_name:tag`, which allows you to push using: `docker push username/repository_name:tag`. (Source: `https://docs.docker.com/reference/cli/docker/image/push/`)
+Looking back at some of my errors, I think they just stemmed from my unfamiliarity with docker and not realizing it had it's own terminal. I put the container as a local file on my machine with dockerfile and .dockerignore (ChatGPT) in the angular-site folder. Dockerfile was built following the guideline of the project and I used `node:18-bullseye` like suggested and didn't need to install nodejs like I did earlier. To view the image running you can go to `http://localhost:4200`. In the desktop app you can push and pull images by clicking on the three dots next to an image. You need to make sure you are logged in with `docker login`. Then you tag the image with `docker tag your_image username/repository_name:tag`, which allows you to push using: `docker push username/repository_name:tag`. (Source: https://docs.docker.com/reference/cli/docker/image/push/)
 
 My Docker Hub repo is here: https://hub.docker.com/repository/docker/jpankake67/pankake-ceg3150/general
