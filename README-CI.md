@@ -1,7 +1,7 @@
 # CI Project Overview
 I am making a docker container and image. Containers are used like templates, and images are made from containers. This is important as it allows for easy sharing to others or quickly moving to new server providers.
 
-To install docker you go to `https://hub.docker.com/` and there is a download button on the top of the page. When run it will require a system restart.
+To install docker you go to https://hub.docker.com/ and there is a download button on the top of the page. When run it will require a system restart.
 You can make a repository in docker by going to https://hub.docker.com/repositories/{username} and clicking create repository in the top right. You can also choose whether it is public or private here. (Source: https://hub.docker.com/repository/create?namespace=jpankake67). Shows up when making a repo
 
 *Note for grading I messed up some of these parts but decided to leave then in so you could see my process. Most of my errors are from not realizing docker has a terminal*
