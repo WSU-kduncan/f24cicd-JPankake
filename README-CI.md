@@ -57,7 +57,7 @@ My workflow file works by checking when a push happens on the main branch. It th
 ```mermaid
 graph LR
     A[Developer] -->|Push Code| B[GitHub Repository]
-    B -->|Triggers| C[GitHub Actions Workflow]
-    C -->|Check Out Code| D[Build Docker Image]
+    B -->|Triggers| C[GitHub Workflow]
+    C -->|Check Code| D[Build Docker Image]
     D -->|Log In| E[DockerHub]
     D -->|Push Image| E
