@@ -47,3 +47,8 @@ I then used:
 Looking back at some of my errors, I think they just stemmed from my unfamiliarity with docker and not realizing it had it's own terminal. I put the container as a local file on my machine with dockerfile and .dockerignore (ChatGPT) in the angular-site folder. Dockerfile was built following the guideline of the project and I used `node:18-bullseye` like suggested and didn't need to install nodejs like I did earlier. To view the image running you can go to http://localhost:4200. In the desktop app you can push and pull images by clicking on the three dots next to an image. You need to make sure you are logged in with `docker login`. Then you tag the image with `docker tag your_image username/repository_name:tag`, which allows you to push using: `docker push username/repository_name:tag`. (Source: https://docs.docker.com/reference/cli/docker/image/push/)
 
 My Docker Hub repo is here: https://hub.docker.com/repository/docker/jpankake67/pankake-ceg3150/general
+
+Earlier I set up the secrets. How I set them up is on line 23 to 34. I used `DOCKER_USERNAME` which is the username that will be used in authentication. I also used `DOCKER_TOKEN` which is used to push docker images.
+GitHub workflow is used to automate actions. It will look in the repository for a dockerfile. After it will use the secrets to log into docker. The dockerfile will then be built in docker and pushed.
+Link to the workflow file: [`.github/workflows/docker-publish.yml`](.github/workflows/docker-publish.yml)
+
