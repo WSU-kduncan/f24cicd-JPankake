@@ -54,3 +54,11 @@ Link to the workflow file: [`.github/workflows/docker-publish.yml`](.github/work
 
 My workflow file works by checking when a push happens on the main branch. It then looks for the dockerfile and logs into docker with my serects. The dockerfile is then built in docker and pushed. If someone wants to use my workflow they would need to set up the correct secrets using `DOCKER_USERNAME` and `DOCKER_TOKEN`.
 
+graph LR
+    A[Developer] -->|Push Code| B[GitHub Repository]
+    B -->|Triggers| C[GitHub Actions Workflow]
+    C -->|Check Out Code| D[Build Docker Image]
+    D -->|Log In| E[DockerHub]
+    D -->|Push Image| E
+
+
