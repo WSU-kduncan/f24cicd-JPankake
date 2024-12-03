@@ -50,5 +50,7 @@ My Docker Hub repo is here: https://hub.docker.com/repository/docker/jpankake67/
 
 Earlier I set up the secrets. How I set them up is on line 23 to 34. I used `DOCKER_USERNAME` which is the username that will be used in authentication. I also used `DOCKER_TOKEN` which is used to push docker images.
 GitHub workflow is used to automate actions. It will look in the repository for a dockerfile. After it will use the secrets to log into docker. The dockerfile will then be built in docker and pushed.
-Link to the workflow file: [`.github/workflows/docker-publish.yml`](.github/workflows/docker-publish.yml)
+Link to the workflow file: [`.github/workflows/docker-publish.yml`](.github/workflows/docker-publish.yml).
+
+My workflow file works by checking when a push happens on the main branch. It then looks for the dockerfile and logs into docker with my serects. The dockerfile is then built in docker and pushed. If someone wants to use my workflow they would need to set up the correct secrets using `DOCKER_USERNAME` and `DOCKER_TOKEN`.
 
