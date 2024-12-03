@@ -14,7 +14,7 @@ COPY wsu-hw-ng-main/package*.json ./
 RUN npm install
 
 # Copy the rest of the Angular application code into the container
-COPY wsu-hw-ng-main/ .
+COPY angular-site/wsu-hw-ng-main/ .
 
 # Expose port 4200 (default port for Angular applications)
 EXPOSE 4200
