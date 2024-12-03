@@ -20,7 +20,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/angular-app:${{ github.sha }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/angular-app:${{ github.sha }} angular-site/
 
       - name: Push Docker image to DockerHub
         run: |
