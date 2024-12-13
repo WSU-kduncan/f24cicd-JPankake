@@ -1,0 +1,12 @@
+[
+  {
+    "id": "run-docker-script",
+    "execute-command": "~/manage_container.sh",
+    "pass-arguments-to-command": [
+      {
+        "source": "payload",
+        "name": "tag"
+      }
+    ]
+  }
+]
