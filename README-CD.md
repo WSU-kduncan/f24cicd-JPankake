@@ -9,3 +9,4 @@ In part one the project is being edited to immplement continuous deployment for 
 To create and push a tag in git I used the following format:
 ```bash
 git tag -a v<MAJOR.MINOR.PATCH> -m "<message>"
+git push origin v<MAJOR.MINOR.PATCH>
