@@ -9,6 +9,7 @@ To create and push a tag in git I used the following format:
 ```bash
 git tag -a v<MAJOR.MINOR.PATCH> -m "<message>"
 git push origin v<MAJOR.MINOR.PATCH>
+```
 
 The workflow has been updated as follows:
 
