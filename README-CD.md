@@ -23,4 +23,4 @@ I started by looking through the resources and trying to understand how metadata
 
 ## Part 2 Depolyment
 
-To install docker I used ```sudo apt update``` and `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common` to get the prerequisites for docker. I then ran `curl -fsSL https://get.docker.com -o get-docker.sh` and `sudo sh get-docker.sh` to install docker itself. Running `docker --version` confirms it is installed.
+To install docker I used `sudo apt update` and `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common` to get the prerequisites for docker. I then ran `curl -fsSL https://get.docker.com -o get-docker.sh` and `sudo sh get-docker.sh` to install docker itself. Running `docker --version` confirms it is installed.
