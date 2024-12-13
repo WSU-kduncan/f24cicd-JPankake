@@ -26,4 +26,31 @@ I started by looking through the resources and trying to understand how metadata
 
 To install docker I used
 `sudo apt update`
- and `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common` to get the prerequisites for docker. I then ran `curl -fsSL https://get.docker.com -o get-docker.sh` and `sudo sh get-docker.sh` to install docker itself. Running `docker --version` confirms it is installed.
+ and `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common` to get the prerequisites for docker. I then ran `curl -fsSL https://get.docker.com -o get-docker.sh` and `sudo sh get-docker.sh` to install docker itself. Running `docker --version` confirms it is installed. I then logged into dockerhub using `sudo docker login -u jpankake67 -p password` and did `sudo docker pull jpankake67/pankake-ceg3150:tag` to pull the image. I ran the image using `sudo docker run -d -p 80:4200 --name p5 jpankake67/pankake-ceg3150:tag`. I tested it could connect by using `curl` followed by localhost the private IP and the public IP. I then wrote the following script:
+```bash
+#!/bin/bash
+
+# Pull the latest image
+docker pull <your-dockerhub-username>/<your-image-name>:<tag>
+
+# Stop and remove the previously running container
+docker stop <container-name>
+docker rm <container-name>
+
+# Run the new container with the latest image
+docker run -d -p 80:80 --name <container-name> <your-dockerhub-username>/<your-image-name>:<tag>
+```
+I made the script executable with `chmod +x manage_container.sh`. I then used `sudo apt-get install golang-go`, `sudo wget https://github.com/adnanh/webhook/releases/download/2.8.2/webhook-linux-amd64.tar.gz -O /tmp/webhook-linux-amd64.tar.gz`, `sudo tar -xvzf /tmp/webhook-linux-amd64.tar.gz -C /usr/local/bin/` and `sudo chmod +x /usr/local/bin/webhook`. This installed the webhook and made it an executable. `webhook -version` confirms it is installed. I made this json hook file:
+```json
+[
+  {
+    "id": "run-docker-script",
+    "execute-command": "/home/ubuntu/manage_container.sh",
+    "command-working-directory": "/home/ubuntu",
+    "response-message": "OK"
+  }
+]
+```
+After I used `webhook -hooks /home/ubuntu/hooks.json -port 4200` to run the webhook listener.
+
+Step by Step of part 2:
