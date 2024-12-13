@@ -30,15 +30,27 @@ To install docker I used
 ```bash
 #!/bin/bash
 
-# Pull the latest image
-docker pull <your-dockerhub-username>/<your-image-name>:<tag>
+# Get the ref passed as an argument
+REF=$1
 
-# Stop and remove the previously running container
-docker stop <container-name>
-docker rm <container-name>
+# Extract the tag or branch name
+if [[ $REF == refs/tags/* ]]; then
+  TAG_NAME="${REF#refs/tags/}"  # For tags, remove the "refs/tags/" prefix
+else
+  TAG_NAME="${REF#refs/heads/}"  # For branches, remove the "refs/heads/" prefix
+fi
 
-# Run the new container with the latest image
-docker run -d -p 80:80 --name <container-name> <your-dockerhub-username>/<your-image-name>:<tag>
+echo "Pulling the latest image with tag $TAG_NAME..." >> /home/ubuntu/manage_container.log
+sudo docker pull jpankake67/pankake-ceg3150:$TAG_NAME >> /home/ubuntu/manage_container.log 2>&1
+
+echo "Stopping and removing any previously running containers..." >> /home/ubuntu/manage_container.log
+sudo docker stop p5 >> /home/ubuntu/manage_container.log 2>&1
+sudo docker rm p5 >> /home/ubuntu/manage_container.log 2>&1
+
+echo "Running the new container..." >> /home/ubuntu/manage_container.log
+sudo docker run -d -p 80:4200 --name p5 jpankake67/pankake-ceg3150:$TAG_NAME >> /home/ubuntu/manage_container.log 2>&1
+
+echo "Script completed." >> /home/ubuntu/manage_container.log
 ```
 I made the script executable with `chmod +x manage_container.sh`. I then used `sudo apt-get install golang-go`, `sudo wget https://github.com/adnanh/webhook/releases/download/2.8.2/webhook-linux-amd64.tar.gz -O /tmp/webhook-linux-amd64.tar.gz`, `sudo tar -xvzf /tmp/webhook-linux-amd64.tar.gz -C /usr/local/bin/` and `sudo chmod +x /usr/local/bin/webhook`. This installed the webhook and made it an executable. `webhook -version` confirms it is installed. I made this json hook file:
 ```json
@@ -47,10 +59,16 @@ I made the script executable with `chmod +x manage_container.sh`. I then used `s
     "id": "run-docker-script",
     "execute-command": "/home/ubuntu/manage_container.sh",
     "command-working-directory": "/home/ubuntu",
-    "response-message": "OK"
+    "pass-arguments-to-command": [
+      {
+        "source": "payload",
+        "name": "ref"
+      }
+    ],
+    "response-message": "Script executed successfully!"
   }
 ]
 ```
 After I used `webhook -hooks /home/ubuntu/hooks.json -port 4200` to run the webhook listener.
 
-Step by Step of part 2:
+
