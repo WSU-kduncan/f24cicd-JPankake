@@ -88,5 +88,8 @@ graph LR
 
 Here is a diagram using mermaid, I referenced my previous project again for how to set it up.
 
+**Note About Video Documentation**
+I just want to start by apolgizing as I don't think I'm gonna get a video to document it working. I tried hard to get this project done before the exam but I got stuck for a while on trying to get the webhook to actually read the payload. I finally figured it out but shortly after my AWS ran out of time on the lab and now my terminal keeps freezing whenever I try to do anything in the instance. I have tried the normal control + c which doesn't work. I have also consulted the interent and ChatGPT to try to find out what is wrong with no luck. I believe I have done everything else in the project to the best of my ability. As of writing this I am going to turn it in without the video documentation. I have seen you email about late submissions and I will try my best to make some time before the late submission dealine to get the video done.
+
 
 
