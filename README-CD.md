@@ -70,7 +70,21 @@ I made the script executable with `chmod +x manage_container.sh`. I then used `s
 ]
 ```
 After I used `webhook -hooks /home/ubuntu/hooks.json -port 4200` to run the webhook listener. At this point I left my computer on without commiting the changes and I lost a lot of progress so I will instead be trying to answer the documentation portion only.
-My ec2 instance uses 3.89.29.161 as the public IP address. I chose Ubuntu 24.04 as my operating system with an ami `ami-0e2c8caa4b6378d8c`. The webhook is so the ec2 instance has something to listen with, allowing it to take in payloads from Docker and GitHub. Both of my scripts are also in a deploment folder in my repo. On the instance the scripts are in the home directory as I struggled with file paths and once I got it working I was too scared to change it. The hooks file is responsible for connecting the payload and the .sh script. To start the webhook without using a service you could do it manually using `/usr/local/bin/webhook -hooks /home/ubuntu/hooks.json -verbose`. To see logs from the program `sudo journalctl -u webhook-listener.service -f`. `curl -X POST http://3.89.29.161:4200/hooks/run-docker-script -d '{"tag": "v1.0"}` can be used to send a test request. To see the logs `docker logs p5` can be used. To set up dockerHub to use the listener I opened the settings and went to the webhooks section I put `http://3.89.29.161:4200/hooks/run-docker-script` as the url. To make the listener active on instance startup I created a system file that runs hooks.json.
+My ec2 instance uses 44.223.141.114 as the public IP address. I chose Ubuntu 24.04 as my operating system with an ami `ami-0e2c8caa4b6378d8c`. The webhook is so the ec2 instance has something to listen with, allowing it to take in payloads from Docker and GitHub. Both of my scripts are also in a deploment folder in my repo. On the instance the scripts are in the home directory as I struggled with file paths and once I got it working I was too scared to change it. The hooks file is responsible for connecting the payload and the .sh script. To start the webhook without using a service you could do it manually using `/usr/local/bin/webhook -hooks /home/ubuntu/hooks.json -verbose`. To see logs from the program `sudo journalctl -u webhook-listener.service -f`. `curl -X POST http://44.223.141.114:4200/hooks/run-docker-script -d '{"tag": "v1.0"}` can be used to send a test request. To see the logs `docker logs p5` can be used. To set up dockerHub to use the listener I opened the settings and went to the webhooks section I put `http://44.223.141.114:4200/hooks/run-docker-script` as the url. To make the listener active on instance startup I created a system file that runs hooks.json.
+
+graph LR
+    A[DockerHub] -->|Pushes new image| B[Webhook Listener]
+    B -->|Triggers script| C[EC2 Instance]
+    C -->|Runs Docker Container| D[Docker]
+    D -->|Container Running| E[Application]
+    
+    subgraph CI/CD Tools
+        A
+        B
+        C
+    end
+
+Here is a diagram using mermaid, I referenced my previous project again for how to set it up.
 
 
 
